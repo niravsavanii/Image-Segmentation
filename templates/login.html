@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% include 'bootstrap.html' %}
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/style.css')}}">
+    <title>Login in</title>
+</head>
+<body style="background-image: url({{url_for('static',filename='image/6.jpg')}});">
+    <div class="container-fluid d-flex align-items-center justify-content-center" style="min-height: 100vh;">
+        <div class="card" style="background: none;width: 450px">
+              <div class="card-body" style="background: rgba(255, 255, 255, 0.8);">
+                  <h3 class="text-center mt-2"><a href="/home" class="card-title" style="text-decoration: none; font-weight: bold; font-family: 'Lobster', cursive;">Image Segmentation</a></h3>
+                  {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% for category, message in messages %}
+                            {% if category == 'success' %}
+                                <p class="alert alert-success mt-4" style="padding: 8px;" role="alert">
+                                    {{ message }}
+                                </p>
+                            {% endif %}
+                        {% endfor %}
+                  {% endwith %}
+                  <form class="form-group" method="post" action="/loginVerification" name="loginForm">
+                    <div class="row">
+                        <div class="col">
+                            <p style="color: red;" id="emailIDErr"></p>
+                            <input type="email" name="email" id="emailID" class="form-control p-2 mt-4" placeholder="Email">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <p style="color: red;" id="passwordErr"></p>
+                            <input type="password" name="password" id="password" class="form-control p-2" placeholder="Password">
+                        </div>
+                    </div>
+                      {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% for category, message in messages %}
+                            {% if category == 'error' %}
+                                <div class="alert alert-danger mt-3" style="padding: 8px;" role="alert">
+                                    {{ message }}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                      {% endwith %}
+                      <input type="submit" class="form-control btn p-2 mt-4" style="background-color: #141E30; color: white;" onmouseover="this.style.backgroundColor='#243B55'" onmouseout="this.style.backgroundColor='#141E30'" value="Log in">
+                  </form>
+                  <div class="row mt-4">
+                       <div class="col text-center">
+                           <p>OR</p>
+                       </div>
+                   </div>
+                  <div class="row">
+                    <div class="col text-center">
+                        <a href="/emailForForgotPassword" style="text-decoration: none; color: #141E30;" onmouseover="this.style.color='#243B55'" onmouseout="this.style.color='#141E30'">Forgot password?</a>
+                    </div>
+                  </div>
+                   <div class="row justify-content-center">
+                       <div class="col-10">
+                           <hr>
+                       </div>
+                   </div>
+                  <div class="row">
+                    <div class="col text-center">
+                        <p>Not a member? <a href="/registration" style="text-decoration: none; color: #141E30;" onmouseover="this.style.color='#243B55'" onmouseout="this.style.color='#141E30'">Sign up</a></p>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+
+    <!--script-- type="text/javascript">
+    $(document).ready(function(){
+        $('#emailID').keyup(function(){
+            var emailID=$('#emailID').val();
+            if (emailID === "")
+            {
+                $('#emailIDErr').html('Email is required');
+                return false;
+            }
+            else
+            {
+                if(emailID.length<=6 || emailID>30)
+                {
+                    $('#emailIDErr').html('');
+                    return false;
+                }
+                else if(!/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/.test(document.loginForm.emailID.value))
+                {
+                    $('#emailIDErr').html('Email is uncompleted');
+                    return false;
+                }
+                else
+                {
+                    $('#emailIDErr').html('');
+                    return false;
+                }
+            }
+        });
+
+        $('#password').keyup(function(){
+            var pswd=$('#password').val();
+            if (pswd === "")
+            {
+                $('#passwordErr').html('Password is required');
+                return false;
+            }
+            else
+            {
+                if(!/^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,20}$/.test(document.loginForm.password.value))
+                {
+                    $('#passwordErr').html('Password should be 8 to 20 characters and contains at least one digit, uppercase, lowercase and special character');
+                    return false;
+                }
+                else
+                {
+                    $('#passwordErr').html('');
+                    return false;
+                }
+            }
+        });
+    });
+    </script-->
+</body>
+</html>

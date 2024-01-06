@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% include 'bootstrap.html' %}
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/style.css')}}">
+    <title>Home</title>
+    <style>
+        #background{
+            margin: 0;
+            padding: 0;
+            background-image: url({{url_for('static',filename='image/7.png')}}); /* Replace 'your-image.jpg' with the path to your image */
+            background-size: cover; /* Cover the entire viewport */
+            background-attachment: fixed; /* Fix the background image */
+            background-repeat: no-repeat; /* Do not repeat the background image */
+            height: 100vh; /* Set the height to 100% of the viewport */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    {% include 'navbar.html' %}
+
+    <div class="container-fluid d-flex align-items-center justify-content-center" id="background" style="min-height: 100vh;">
+        <div class="card mt-4" style="background: none;width: 480px;">
+              <div class="card-body" style="background: rgba(255, 255, 255, 0.9);">
+                  <h3 class="text-center"><a href="/home" class="card-title" style="text-decoration: none; font-weight: bold; font-family: 'Lobster', cursive;">separation parameters</a></h3>
+                  <form method="post" class="form-group" action="/segmentImage" enctype="multipart/form-data">
+                        <div class="row mt-4">
+                            <div class="col-9 text-center">
+                                <b><label class="control-label" for="pointsPerSide">Boundary Detail: </label></b>
+                            </div>
+                            <div class= "col-3">
+                                <input type="number" style="width: 75px;" class="form-control p-2" name="pointsPerSide" id="pointsPerSide" min="8" max="128" value="32">
+                            </div>
+                        </div>
+
+                        <div class="row mt-2">
+                            <div class="col-9 text-center">
+                                <b><label class="control-label" for="predIouThresh">Patch Accuracy Threshold:</label></b>
+                            </div>
+                            <div class= "col-3">
+                                <input type="number" style="width: 75px;" class="form-control p-2" name="predIouThresh" id="predIouThresh" step="0.01" min="0.0" max="1.0" value="0.9">
+                            </div>
+                        </div>
+
+                        <div class="row row mt-2">
+                            <div class="col-9 text-center">
+                                <b><label class="control-label" for="stabilityScoreThresh">Patch Stability Threshold:</label></b>
+                            </div>
+                            <div class= "col-3">
+                                <input type="number" style="width: 75px;" class="form-control p-2" name="stabilityScoreThresh" id="stabilityScoreThresh" step="0.01" min="0.0" max="1.0" value="0.96">
+                            </div>
+                        </div>
+
+                        <div class="row row mt-2">
+                            <div class="col-9 text-center">
+                                <b><label class="control-label" for="cropNLayers">Small Patch Detection Depth:</label></b>
+                            </div>
+                            <div class= "col-3">
+                                <input type="number" style="width: 75px;" class="form-control p-2" name="cropNLayers" id="cropNLayers" min="0" max="5" value="1">
+                            </div>
+                        </div>
+
+                        <div class="row row mt-2">
+                            <div class="col-9 text-center">
+                                <b><label class="control-label" for="cropNPointsDownscaleFactor">Patch Point Density Reduction Factor:</label></b>
+                            </div>
+                            <div class= "col-3">
+                                <input type="number" style="width: 75px;" class="form-control p-2" name="cropNPointsDownscaleFactor" id="cropNPointsDownscaleFactor" min="1" max="8" value="2">
+                            </div>
+                        </div>
+
+                        <div class="row row mt-2">
+                            <div class="col-9 text-center">
+                                <b><label class="control-label" for="minMaskRegionArea">Min Patch Area:</label></b>
+                            </div>
+                            <div class= "col-3">
+                                <input type="number" style="width: 75px;" class="form-control p-2" name="minMaskRegionArea" id="minMaskRegionArea" min="1" max="1000" value="100">
+                            </div>
+                        </div>
+
+                        <div class="row row mt-2">
+                            <div class="col-9 text-center">
+                                <b><label class="control-label" for="pointsPerSide">Boundary Detail: </label></b>
+
+                            </div>
+                            <div class= "col-3">
+                                <input type="number" style="width: 75px;" class="form-control p-2" name="pointsPerSide" id="pointsPerSide" min="8" max="128" value="32">
+                            </div>
+                        </div>
+
+                        <div class="row row mt-2">
+                            <div class="col-9 text-center">
+                                <b><label class="control-label" for="outputImageDpi">Output Image DPI:</label></b>
+                            </div>
+                            <div class= "col-3">
+                                <input type="number" style="width: 75px;" class="form-control p-2" name="outputImageDpi" id="outputImageDpi" min="50" max="300" value="100">
+                            </div>
+                        </div>
+
+                        <div class="row row mt-2 justify-content-center">
+                            <div class= "col-12">
+                                <input type="file" class="form-control p-2" name="image" id="imageInput" accept=".jpg, .jpeg, .png">
+                            </div>
+                        </div>
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% for category, message in messages %}
+                            {% if category == 'error' %}
+                                <div class="alert alert-danger mt-2" style="padding:8px;" role="alert">
+                                    {{ message }}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endwith %}
+
+                     <input type="submit" class="form-control btn btn-warning p-2 mt-4 mb-4" value="Generate image">
+                  </form>
+              </div>
+        </div>
+    </div>
+
+    {% include 'footer.html' %}
+</body>
+</html>

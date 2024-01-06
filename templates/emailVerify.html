@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% include 'bootstrap.html' %}
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/style.css')}}">
+    <title>Email OTP</title>
+    <style>
+        #background{
+            margin: 0;
+            padding: 0;
+            background-image: url({{url_for('static',filename='image/7.png')}}); /* Replace 'your-image.jpg' with the path to your image */
+            background-size: cover; /* Cover the entire viewport */
+            background-attachment: fixed; /* Fix the background image */
+            background-repeat: no-repeat; /* Do not repeat the background image */
+            height: 100vh; /* Set the height to 100% of the viewport */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+   <div class="container-fluid d-flex align-items-center justify-content-center" id="background" style="min-height: 100vh;">
+        <div class="card" style="background: none;width: 450px">
+              <div class="card-body" style="background: rgba(255, 255, 255, 0.9);">
+                  <h3 class="text-center mt-2"><a href="/home" class="card-title" style="text-decoration: none; font-weight: bold; font-family: 'Lobster', cursive;">Image Segmentation</a></h3>
+                  <form class="form-group" action="/otpVerification" method="post">
+                    <div class="row mt-4">
+                        <div class="col">
+                            <p style="color: #141E30; text-align:center;">One-time password (OTP) has been sent to the registered email id. Please check email for the verification.</p>
+                            <input type="text" name="otp" class="form-control p-2" placeholder="Enter OTP">
+                        </div>
+                    </div>
+
+                      <input type="hidden" name="email" class="form-control mt-3" value="{{email}}">
+                      <input type="submit" class="form-control btn p-2 mt-4 mb-4" style="background-color: #141E30; color: white;" onmouseover="this.style.backgroundColor='#243B55'" onmouseout="this.style.backgroundColor='#141E30'" value="Verify">
+                  </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

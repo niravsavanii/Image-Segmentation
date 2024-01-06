@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% include 'bootstrap.html' %}
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/style.css')}}">
+    <title>Home</title>
+    <style>
+        #background{
+            margin: 0;
+            padding: 0;
+            background-image: url({{url_for('static',filename='image/7.png')}}); /* Replace 'your-image.jpg' with the path to your image */
+            background-size: cover; /* Cover the entire viewport */
+            background-attachment: fixed; /* Fix the background image */
+            background-repeat: no-repeat; /* Do not repeat the background image */
+            height: 100vh; /* Set the height to 100% of the viewport */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="container-fluid d-flex align-items-center justify-content-center" id="background">
+        <div class="row mt-5">
+            <div class="col-md-5">
+                <div class="card" style="width: 40rem;">
+                    <div class="card-body">
+                        <h4 class="card-title text-center mt-1 mb-3">Input image</h4>
+                        <img class="card-img" height="500px;" width="" src={{url_for('static',filename='image/image.jpeg')}} alt="input image">
+                        <p class="card-text text-center mt-2">The input is a complex, unsegmented textile design featuring various elements such as patterns, colors, and shapes seamlessly blended together. The intricate details and lack of distinct boundaries suggest a cohesive and visually engaging composition, prompting further exploration to discern specific motifs and textures.</p>
+                        <div class="text-center">
+                            <a class="btn btn-warning" href="/imageSeparation">Try it now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1">
+
+            </div>
+
+            <div class="col-md-5">
+                <div class="card" style="width: 40rem;">
+                    <div class="card-body">
+                        <h4 class="card-title text-center mt-1 mb-3">Output image</h4>
+                        <img class="card-img" height="500px;" width="" src={{url_for('static',filename='image/image_visualization.png')}} alt="input image">
+                        <p class="card-text text-center mt-2">The output image showcases a segmented view of the textile design, where each object is distinctly highlighted by a unique random color mask against a black background. This visualization enhances the clarity of individual elements within the design, offering a comprehensive representation of the diverse patterns, shapes, and colors present in the original composition..</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include 'footer.html' %}
+</body>
+</html>

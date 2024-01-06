@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% include 'bootstrap.html' %}
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/style.css')}}">
+    <title>Result</title>
+    <style>
+        #background{
+            margin: 0;
+            padding: 0;
+            background-image: url({{url_for('static',filename='image/7.png')}}); /* Replace 'your-image.jpg' with the path to your image */
+            background-size: cover; /* Cover the entire viewport */
+            background-attachment: fixed; /* Fix the background image */
+            background-repeat: no-repeat; /* Do not repeat the background image */
+            height: 100vh; /* Set the height to 100% of the viewport */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    {% include 'navbar.html' %}
+
+    <div class="container-fluid d-flex align-items-center justify-content-center" id="background">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card" style="width: 37rem;">
+                    <div class="card-body">
+                        <h4 class="card-title text-center mt-1 mb-3">Input image</h4>
+                        <img class="card-img" height="500px;" src={{ image_path }} alt="input image">
+                        <a class="btn btn-warning mt-4" href="/imageSeparation">Try it agian</a>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-6">
+                <div class="card" style="width: 37rem;">
+                    <div class="card-body">
+                        <h4 class="card-title text-center mt-1 mb-3">Output image</h4>
+                        <img class="card-img" height="500px;" src={{ visualization_path }} alt="input image">
+                        <a download class="btn btn-warning mt-4" href={{ visualization_path }}>Download image</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include 'footer.html' %}
+</body>
+</html>

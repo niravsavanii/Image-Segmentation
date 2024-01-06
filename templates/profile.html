@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    {% include 'bootstrap.html' %}
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/style.css')}}">
+    <title>Profile</title>
+    <style>
+        #background{
+            margin: 0;
+            padding: 0;
+            background-image: url({{url_for('static',filename='image/7.png')}}); /* Replace 'your-image.jpg' with the path to your image */
+            background-size: cover; /* Cover the entire viewport */
+            background-attachment: fixed; /* Fix the background image */
+            background-repeat: no-repeat; /* Do not repeat the background image */
+            height: 100vh; /* Set the height to 100% of the viewport */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+   <div class="container-fluid d-flex align-items-center justify-content-center" id="background" style="min-height: 100vh;">
+        <div class="card" style="background: none;width: 450px">
+              <div class="card-body" style="background: rgba(255, 255, 255, 0.9);">
+                  <h3 class="text-center mt-2"><a href="/home" class="card-title" style="text-decoration: none; font-weight: bold; font-family: 'Lobster', cursive;">Profile</a></h3>
+                  <div class="row mt-4">
+                        <div class= "col">
+                            <b><label class="form-label">First Name</label></b>
+                            <span class="form-control">{{firstName}}</span>
+                        </div>
+                  </div>
+
+                  <div class="row mt-2">
+                        <div class= "col">
+                            <b><label class="form-label">Last Name</label></b>
+                            <span class="form-control">{{lastName}}</span>
+                        </div>
+                  </div>
+
+                  <div class="row mt-2">
+                        <div class= "col">
+                            <b><label class="form-label">Email</label></b>
+                            <span class="form-control">{{email}}</span>
+                        </div>
+                  </div>
+
+                  <div class="row mt-4">
+                        <div class="col text-center">
+                           <a href="/" style="text-decoration: none; color: #141E30;" onmouseover="this.style.color='#243B55'" onmouseout="this.style.color='#141E30'">Update details?</a>
+                        </div>
+                  </div>
+
+                   <div class="row justify-content-center">
+                           <div class="col-10">
+                               <hr>
+                           </div>
+                   </div>
+                  <div class="row">
+                        <div class="col text-center">
+                            <a href="/home" style="text-decoration: none; color: #141E30;" onmouseover="this.style.color='#243B55'" onmouseout="this.style.color='#141E30'">Back to home</a></p>
+                        </div>
+                  </div>
+            </div>
+        </div>
+   </div>
+</body>
+</html>

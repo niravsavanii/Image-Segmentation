@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    {% include 'bootstrap.html' %}
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/style.css')}}">
+    <title>My photos</title>
+    <style>
+        #background{
+            margin: 0;
+            padding: 0;
+            background-image: url({{url_for('static',filename='image/7.png')}}); /* Replace 'your-image.jpg' with the path to your image */
+            background-size: cover; /* Cover the entire viewport */
+            background-attachment: fixed; /* Fix the background image */
+            background-repeat: no-repeat; /* Do not repeat the background image */
+            height: 100vh; /* Set the height to 100% of the viewport */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="container-fluid d-flex align-items-center justify-content-center" id="background" style="min-height: 100vh;">
+        <div class="card" style="background: none;width: 500px">
+              <div class="card-body" style="background: rgba(255, 255, 255, 0.9);">
+                  <h3 class="text-center mt-2" class="card-title" style="text-decoration: none; font-weight: bold; font-family: 'Lobster', cursive;">Image list</h3>
+                  <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Input image</th>
+                                <th class="text-center">Output image</th>
+                                <th class="text-center">Created at</th>
+                                <th class="text-center">Option</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {% for user_image in data %}
+                                <tr class="justify-content-center">
+                                    <td class="text-center"><img src="{{ user_image[1] }}" height="100px"  width="100px" alt="input" class="img-fluid"></td>
+                                    <td class="text-center"><img src="{{ user_image[2] }}" height="100px"  width="100px" alt="output" class="img-fluid"></td>
+                                    <td class="text-center">{{ user_image[3] }}</td>
+                                    <td class="text-center"><a download class="btn btn-warning" href="{{ user_image[2] }}">Download image</a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                  </table>
+            </div>
+        </div>
+   </div>
+
+   {% include 'footer.html' %}
+</body>
+</html>

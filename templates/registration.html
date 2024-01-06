@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% include 'bootstrap.html' %}
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/style.css')}}">
+    <title>Sign up</title>
+</head>
+<body style="background-image: url({{url_for('static',filename='image/7.png')}});">
+    <div class="container-fluid d-flex align-items-center justify-content-center" style="min-height: 100vh;">
+        <div class="card" style="background: none;width: 480px;">
+              <div class="card-body" style="background: rgba(255, 255, 255, 0.8);">
+                  <h3 class="text-center mt-2"><a href="/home" class="card-title" style="text-decoration: none; font-weight: bold; font-family: 'Lobster', cursive;">Image Segmentation</a></h3>
+                  <form class="form-group"  method="post" action="/newUser" name="registrationForm">
+                    <div class="row">
+                        <div class="col">
+                            <p style="color: red;" id="firstnameErr"></p>
+                            <input type="text" name="firstName" id="firstName" class="form-control p-2 mt-4" placeholder="First Name">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <p style="color: red;" id="lastnameErr"></p>
+                            <input type="text" name="lastName" id="lastName" class="form-control p-2" placeholder="Last Name">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <p style="color: red;" id="emailIDErr"></p>
+                            <input type="email" name="email" id="emailID" class="form-control p-2" placeholder="Email">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <p style="color: red; max-width: 300px;" id="passwordErr"></p>
+                            <input type="password" name="password" id="password" class="form-control p-2" placeholder="Password">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <p style="color: red; max-width: 300px; font: 10px;" id="confirmPasswordErr"></p>
+                            <input type="password" name="rePassword" id="confirmPassword" class="form-control p-2" placeholder="Re-enter Password">
+                        </div>
+                    </div>
+
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% for category, message in messages %}
+                            {% if category == 'error' %}
+                                <div class="alert alert-danger" role="alert">
+                                    {{ message }}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endwith %}
+
+                     <input type="submit" class="form-control btn p-2 mt-4" style="background-color: #141E30; color: white;" onmouseover="this.style.backgroundColor='#243B55'" onmouseout="this.style.backgroundColor='#141E30'" value="Sign up">
+                  </form>
+
+                  <div class="row mt-4">
+                       <div class="col text-center">
+                           <p>OR</p>
+                       </div>
+                  </div>
+                  <div class="row mb-2">
+                        <div class="col text-center">
+                            <p>Have an account? <a href="/" style="text-decoration: none; color: #141E30;" onmouseover="this.style.color='#243B55'" onmouseout="this.style.color='#141E30'">Log in</a></p>
+                        </div>
+                  </div>
+              </div>
+        </div>
+    </div>
+
+    <!--script type="text/javascript">
+    $(document).ready(function(){
+
+        $('#firstName').keyup(function(){
+            var firstName=$('#firstName').val();
+            if (firstName === "")
+            {
+                $('#firstnameErr').html('First name is required');
+                return false;
+            }
+            else
+            {
+                if(!/^[a-zA-Z]*$/g.test(document.registrationForm.firstName.value))
+                {
+                    $('#firstnameErr').html('First name must contain only alphabets.');
+                    return false;
+                }
+                else if(firstName.length<2 || firstName.length>20)
+                {
+                    $('#firstnameErr').html('First name should be between 2 and 20 characters.');
+                    return false;
+                }
+                else
+                {
+                    $('#firstnameErr').html('');
+                    return false;
+                }
+            }
+        });
+
+        $('#lastName').keyup(function(){
+            var lastName=$('#lastName').val();
+            if (lastName === "")
+            {
+                $('#lastnameErr').html('Last name is required');
+                return false;
+            }
+            else
+            {
+                if(!/^[a-zA-Z]*$/g.test(document.registrationForm.lastName.value))
+                {
+                    $('#lastnameErr').html('Last name must contain only alphabets.');
+                    return false;
+                }
+                else if(lastName.length<2 || lastName.length>20)
+                {
+                    $('#lastnameErr').html('Last name should be between 2 and 20 characters.');
+                    return false;
+                }
+                else
+                {
+                    $('#lastnameErr').html('');
+                    return false;
+                }
+            }
+        });
+
+        $('#emailID').keyup(function(){
+            var emailID=$('#emailID').val();
+            if (emailID === "")
+            {
+                $('#emailIDErr').html('Email is required');
+                return false;
+            }
+            else
+            {
+                if(emailID.length<=6 || emailID>30)
+                {
+                    $('#emailIDErr').html('');
+                    return false;
+                }
+                else if(!/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/.test(document.registrationForm.emailID.value))
+                {
+                    $('#emailIDErr').html('Email is uncompleted');
+                    return false;
+                }
+                else
+                {
+                    $('#emailIDErr').html('');
+                    return false;
+                }
+            }
+        });
+
+        $('#password').keyup(function(){
+            var pswd=$('#password').val();
+            if (pswd === "")
+            {
+                $('#passwordErr').html('Password is required');
+                return false;
+            }
+            else
+            {
+                if(!/^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,20}$/.test(document.registrationForm.password.value))
+                {
+                    $('#passwordErr').html('Password should be 8 to 20 characters and contains at least one digit, uppercase, lowercase and special character');
+                    return false;
+                }
+                else
+                {
+                    $('#passwordErr').html('');
+                    return false;
+                }
+            }
+        });
+
+        $('#confirmPassword').keyup(function(){
+            var password=$('#password').val();
+            var confirmPassword=$('#confirmPassword').val();
+
+            if(confirmPassword!=password)
+            {
+                $('#confirmPasswordErr').html('Password does not match');
+                return false;
+            }
+            else
+            {
+                $('#confirmPasswordErr').html('');
+            }
+       });
+
+    });
+    </script-->
+</body>
+</html>
